@@ -281,7 +281,7 @@ NSMutableArray *transactions = [account mutableArrayValueForKey:@"transactions"]
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://yoursite.com/2020/03/01/KVC%E5%8E%9F%E7%90%86%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89/" data-id="ck7972a7b0001m33fhrcd2zn8" class="article-share-link">
+                                        <a data-url="http://yoursite.com/2020/03/01/KVC%E5%8E%9F%E7%90%86%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89/" data-id="ck797jcj30000nj3f1f9bgjat" class="article-share-link">
                                             分享
                                         </a>
                                         
@@ -310,24 +310,33 @@ NSMutableArray *transactions = [account mutableArrayValueForKey:@"transactions"]
 
                 
                     
-    <div class="vcomments" id="vcomments"></div>
-    
-<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
-
-        <script>
-            new Valine({
-                el: '#vcomments',
-                appId: 't2cDQfB0X6lIO2MruIMwGv7p-gzGzoHsz',
-                appKey: 'dUALGx7KEqTByT6fTlQ47xJf',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'mp',
-                pageSize: '10',
-                placeholder: '请输入...'
-            })
-        </script>
-        
                         
+  <div class="gitalk" id="gitalk-container"></div>
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+  
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '8d31e847912e72f68e33',
+      clientSecret: '76fa3dc57a75b49b32256fd881795d2d982aac43',
+      repo: 'gitalk',
+      owner: 'SanLiangSan',
+      admin: ['SanLiangSan'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
                             
 
 </article>
