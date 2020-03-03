@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="ios开发，objc底层，移动开发，apple">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    dispatch_source-自定义timer |
+    
+    sanliangsan的博客</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="sanliangsan的博客" type="application/atom+xml">
+</head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-dispatch-source-自定义timer" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h1 class="article-title" itemprop="name">
+      dispatch_source-自定义timer
+    </h1>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/2020/03/03/dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/" class="article-date">
+  <time datetime="2020-03-03T15:19:18.000Z" itemprop="datePublished">2020-03-03</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+                            
+    <div class="tocbot"></div>
+
+
+
+
+
+                                
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+  <div class="article-gallery">
+    <div class="article-gallery-photos">
+      
+        
+          <img src="https://user-gold-cdn.xitu.io/2020/3/3/170a0f85ba343192?w=900&h=383&f=jpeg&s=152213" itemprop="image">
+        
+      
+    </div>
+  </div>
+
+
+                                                
+                                                                    <p><code>NSTimer</code>可能大家都熟悉，他的<code>api</code>也都很简单，但是其使用过程并不容易，相信用过的同学都踩过坑。<a id="more"></a>通常我们这么用:</p>
+<div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="objectivec language-objectivec hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;"><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;定义</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@property</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nonatomic</span>,&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">strong</span>)&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimer</span>&nbsp;*timer;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;使用</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>.timer&nbsp;=&nbsp;[<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimer</span>&nbsp;scheduledTimerWithTimeInterval:<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">1</span>&nbsp;target:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;selector:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@selector</span>(demo:)&nbsp;userInfo:<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">nil</span>&nbsp;repeats:<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">YES</span>];<br></code></pre></div>
+
+<ol>
+<li><code>timerWithTimeInterval</code>开头的方法需要自己添加到指定的<code>runloop</code>中去，而<code>scheduledTimerWithTimeInterval</code>开头的方法默认添加到当前的<code>runloop</code>中去。</li>
+<li>默认添加到<code>runloop</code>中的<code>NSTimer</code>会以<code>NSDefaultRunLoopMode</code>的模式放入当前的<code>runloop</code>,这就导致经常出现的列表滚动<code>timer</code>停止的问题，因为列表滚动的时候<code>runloop</code>的<code>mode</code>切换了，需要我们手动将<code>timer</code>的<code>runloop</code>切换为<code>commonMode</code>。</li>
+<li>我们经常会为使用<code>NSTimer</code>出现的内存泄漏而烦恼,即使有解决方案，总感觉很别扭。</li>
+</ol>
+<p>为什么会内存泄漏呢？我们看一下<code>api</code>的描述：</p>
+<img src="https://user-gold-cdn.xitu.io/2020/2/29/17090ddbcf7c9ac2?w=980&amp;h=752&amp;f=png&amp;s=926300" alt style="display: block; margin: 0 auto; width: 100%; border-radius: 4px; margin-bottom: 25px;">
+
+<p><code>timer</code>会一直强引用<code>target</code>，直到<code>timer</code>调用<code>invalide</code>方法,在<code>[timer invalidate]</code>调用之前，<code>timer</code>和<code>vc</code>构成了<code>循环引用</code>的关系，所以在我们<code>vc</code>在退出当前页面的时候<code>dealloc</code>方法并不调用，所以不论我们的<code>timer</code>是<code>strong</code>还是<code>weak</code>都无济于事，因为<code>api</code>内部会强持有。</p>
+<p>网上有很多种方案去实现打破这种循环引用来解决内存泄漏问题，这里我们从<code>自定义timer</code>说起,自定义timer说到底就是用<code>dispatch_source</code>这套<code>api</code>去实现。</p>
+<h2 id="Dispatch-Source-Timer"><a href="#Dispatch-Source-Timer" class="headerlink" title="Dispatch Source Timer"></a>Dispatch Source Timer</h2><p><code>Dispatch Source Timer</code> 是一种与<code>dispatch queue</code>结合使用的定时器，当需要在后台<code>queue</code>中定期执行任务的时候，使用<code>dispatch source timer</code> 要比使用<code>NSTimer</code>更自然，更高效（因为无需再<code>main queue</code> 和 异步<code>queue</code>之间切换）。</p>
+<h3 id="创建timer"><a href="#创建timer" class="headerlink" title="创建timer"></a>创建timer</h3><p>官方文档提供创建<code>timer</code>的示例是：</p>
+<div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="objectivec language-objectivec hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;">dispatch_source_t&nbsp;CreateDispatchTimer(uint64_t&nbsp;interval,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint64_t&nbsp;leeway,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">dispatch_queue_t</span>&nbsp;queue,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_block_t&nbsp;block)<br>{<br>&nbsp;&nbsp;&nbsp;dispatch_source_t&nbsp;timer&nbsp;=&nbsp;dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>,&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>,&nbsp;queue);<br>&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(timer)<br>&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_source_set_timer(timer,&nbsp;dispatch_walltime(<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">NULL</span>,&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>),&nbsp;interval,&nbsp;leeway);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_source_set_event_handler(timer,&nbsp;block);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_resume(timer);<br>&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;timer;<br>}<br></code></pre></div>
+
+<ol>
+<li>此处的<code>timer</code>是间隔定时器，每隔一段时间就会触发而不需要像<code>NSTimer</code>那样设值<code>repeats</code>。</li>
+<li><code>dispatch_source_set_timer</code> 中的第二个参数可以传入<code>dispatch_time</code> 或者 <code>dispatch_walltime</code> ，<code>dispatch_time</code>表示选择是默认钟表来计时，这个会随着系统休眠而休眠，而 <code>dispatch_walltime</code> 可以让定时间按照实际时间一直运行下去，所以针对间隔时间比较久的定时器应采用<code>dispatch_walltime</code>,上述例子中的<code>dispatch_walltime(NULL, 0)</code> 等同于 <code>dispatch_time(DISPATCH_WALLTIME_NOW, 0)</code>。</li>
+<li><code>dispatch_source_set_timer</code> 中的第四个参数leeway 代表的是期望容忍时间，如果设值为<code>1</code>，意味着定时器时间达到前一秒或者后一秒才真正触发定时器，计时指定<code>leeway</code>的值为<code>0</code>，系统也无法保证完全精确的触发时间，只是尽可能的满足这个需求。</li>
+<li><code>dispatch_source_set_event_handler</code> 的参数<code>block</code>代表的是定时器间隔要执行的任务，它是绑定在执行的<code>queue</code>上的，这个相比<code>NSTimer</code>要方便太多，由于<code>NSTimer</code>需要<code>Runloop</code>支持，<code>NSTimer</code>则需要手动添加到指定线程的<code>runloop</code>中去才能执行。</li>
+</ol>
+<h3 id="开启和停止timer"><a href="#开启和停止timer" class="headerlink" title="开启和停止timer"></a>开启和停止timer</h3><p>开启timer的方法：</p>
+<ul>
+<li><code>dispatch_resume</code></li>
+</ul>
+<p>停止Dispatch Timer有两种方法:</p>
+<ul>
+<li><code>dispatch_suspend</code> :只是暂时把<code>timer</code>挂起，需要和<code>dispatch_resume</code>配对使用，在挂起期间，产生的事件会积累，等到<code>resume</code>的时候会整合为一个事件发送。</li>
+<li><code>dispatch_source_cancel</code>:相当于<code>NSTimer</code>的<code>invalidate</code>。</li>
+</ul>
+<h2 id="自定义timer"><a href="#自定义timer" class="headerlink" title="自定义timer"></a>自定义timer</h2><p>结合上述的理解，我们尝试自定义<code>timer</code>，同样我们模仿<code>NSTimer</code>的接口，这样使用起来没有违和感也更方便:</p>
+<div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="objectivec language-objectivec hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;"><span class="hljs-class" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(142, 192, 124); word-wrap: inherit !important; word-break: inherit !important;"><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@interface</span>&nbsp;<span class="hljs-title" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">SSTimer</span>&nbsp;:&nbsp;<span class="hljs-title" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSObject</span></span><br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;同下面的方法，不过自动开始执行</span><br>+&nbsp;(SSTimer&nbsp;*)scheduledTimerWithTimeInterval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)ti&nbsp;target:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)aTarget&nbsp;selector:(SEL)aSelector&nbsp;userInfo:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nullable</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)userInfo&nbsp;repeats:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)yesOrNo;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;创建一个定时器并返回，但是并不会自动执行，需要手动调用resume方法</span><br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;-&nbsp;parameter:&nbsp;&nbsp;start&nbsp;定时器启动时间</span><br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;-&nbsp;parameter:&nbsp;&nbsp;ti&nbsp;&nbsp;&nbsp;&nbsp;间隔多久开始执行selector</span><br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;-&nbsp;parameter:&nbsp;&nbsp;s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执行的任务</span><br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;-&nbsp;parameter:&nbsp;&nbsp;ui&nbsp;&nbsp;&nbsp;&nbsp;绑定信息</span><br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;-&nbsp;parameter:&nbsp;&nbsp;rep&nbsp;&nbsp;&nbsp;是否重复</span><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">instancetype</span>)initWithTimeInterval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)start&nbsp;interval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)ti&nbsp;target:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)t&nbsp;selector:(SEL)s&nbsp;userInfo:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nullable</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)ui&nbsp;repeats:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)rep;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;扩充block</span><br>+&nbsp;(SSTimer&nbsp;*)scheduledTimerWithTimeInterval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)interval&nbsp;repeats:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)repeats&nbsp;block:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>&nbsp;(^)(SSTimer&nbsp;*timer))block;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;启动</span><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)resume;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;暂定</span><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)suspend;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">///&nbsp;关闭</span><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)invalidate;<br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@property</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">readonly</span>)&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>&nbsp;repeats;<br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@property</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">readonly</span>)&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>&nbsp;timeInterval;<br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@property</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">readonly</span>,&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">getter</span>=isValid)&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>&nbsp;valid;<br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@property</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nullable</span>,&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">readonly</span>,&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">retain</span>)&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>&nbsp;userInfo;<br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@end</span><br></code></pre></div>
+
+<p>这里我们提供了启动和暂停的功能，相比<code>NSTimer</code>要好用很多，同时也扩充了<code>block</code>的参数，虽然<code>apple</code>也提供了<code>block</code>的参数方法，但是需要在<code>ios10</code>以上的系统上才能使用。</p>
+<div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="objectivec language-objectivec hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;"><span class="hljs-meta" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(254, 128, 25); word-wrap: inherit !important; word-break: inherit !important;">#import&nbsp;<span class="hljs-meta-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(184, 187, 38); word-wrap: inherit !important; word-break: inherit !important;">"SSTimer.h"</span></span><br><br><span class="hljs-meta" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(254, 128, 25); word-wrap: inherit !important; word-break: inherit !important;">#define&nbsp;lock(...)&nbsp;\</span><br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_semaphore_wait(_semaphore,&nbsp;DISPATCH_TIME_FOREVER);\<br>&nbsp;&nbsp;&nbsp;&nbsp;__VA_ARGS__;\<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_semaphore_signal(_semaphore);<br><br><span class="hljs-class" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(142, 192, 124); word-wrap: inherit !important; word-break: inherit !important;"><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@implementation</span>&nbsp;<span class="hljs-title" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">SSTimer</span>&nbsp;</span>{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>&nbsp;_valid;<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>&nbsp;_timeInterval;<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>&nbsp;_repeats;<br>&nbsp;&nbsp;&nbsp;&nbsp;__<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">weak</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>&nbsp;_target;<br>&nbsp;&nbsp;&nbsp;&nbsp;SEL&nbsp;_selector;<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_source_t&nbsp;_timer;<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_semaphore_t&nbsp;_semaphore;<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>&nbsp;_userInfo;<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>&nbsp;_running;<br>}<br><br>+&nbsp;(SSTimer&nbsp;*)scheduledTimerWithTimeInterval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)ti&nbsp;target:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)aTarget&nbsp;selector:(SEL)aSelector&nbsp;userInfo:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nullable</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)userInfo&nbsp;repeats:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)yesOrNo&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;SSTimer&nbsp;*timer&nbsp;=&nbsp;[[SSTimer&nbsp;alloc]&nbsp;initWithTimeInterval:<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;interval:ti&nbsp;target:aTarget&nbsp;selector:aSelector&nbsp;userInfo:userInfo&nbsp;repeats:yesOrNo];<br>&nbsp;&nbsp;&nbsp;&nbsp;[timer&nbsp;resume];<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;timer;<br>}<br><br>+&nbsp;(SSTimer&nbsp;*)scheduledTimerWithTimeInterval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)interval&nbsp;repeats:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)repeats&nbsp;block:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>&nbsp;(^)(SSTimer&nbsp;*timer))block&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSParameterAssert</span>(block&nbsp;!=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">nil</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;SSTimer&nbsp;*timer&nbsp;=&nbsp;[[SSTimer&nbsp;alloc]&nbsp;initWithTimeInterval:<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>&nbsp;interval:interval&nbsp;target:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;selector:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@selector</span>(ss_executeBlockFromTimer:)&nbsp;userInfo:[block&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">copy</span>]&nbsp;repeats:repeats];<br>&nbsp;&nbsp;&nbsp;&nbsp;[timer&nbsp;resume];<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;timer;<br>}<br><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">instancetype</span>)initWithTimeInterval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)start&nbsp;interval:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)ti&nbsp;target:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)t&nbsp;selector:(SEL)s&nbsp;userInfo:(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nullable</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)ui&nbsp;repeats:(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)rep&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;=&nbsp;[<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">super</span>&nbsp;init];<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_valid&nbsp;=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">YES</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_timeInterval&nbsp;=&nbsp;ti;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_repeats&nbsp;=&nbsp;rep;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_target&nbsp;=&nbsp;t;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_selector&nbsp;=&nbsp;s;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_userInfo&nbsp;=&nbsp;ui;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_semaphore&nbsp;=&nbsp;dispatch_semaphore_create(<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">1</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">weak</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">typeof</span>(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>)&nbsp;weakSelf&nbsp;=&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_timer&nbsp;=&nbsp;dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>,&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>,&nbsp;dispatch_get_main_queue());<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_source_set_timer(_timer,&nbsp;dispatch_time(DISPATCH_TIME_NOW,&nbsp;start&nbsp;*&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSEC_PER_SEC</span>),&nbsp;ti&nbsp;*&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSEC_PER_SEC</span>,&nbsp;<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">0</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_source_set_event_handler(_timer,&nbsp;^{[weakSelf&nbsp;fire];});<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>;<br>}<br><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)fire&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(!_valid)&nbsp;{<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>;}<br>&nbsp;&nbsp;&nbsp;&nbsp;lock(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>&nbsp;target&nbsp;=&nbsp;_target;)<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(!target)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;invalidate];<br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">else</span>&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;执行selector</span><br><span class="hljs-meta" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(254, 128, 25); word-wrap: inherit !important; word-break: inherit !important;">#pragma&nbsp;clang&nbsp;diagnostic&nbsp;push</span><br><span class="hljs-meta" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(254, 128, 25); word-wrap: inherit !important; word-break: inherit !important;">#pragma&nbsp;clang&nbsp;diagnostic&nbsp;ignored&nbsp;<span class="hljs-meta-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(184, 187, 38); word-wrap: inherit !important; word-break: inherit !important;">"-Warc-performSelector-leaks"</span></span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[target&nbsp;performSelector:_selector&nbsp;withObject:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>];<br><span class="hljs-meta" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(254, 128, 25); word-wrap: inherit !important; word-break: inherit !important;">#pragma&nbsp;clang&nbsp;diagnostic&nbsp;pop</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(!_repeats)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;invalidate];<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)resume&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(_running)&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_resume(_timer);<br>&nbsp;&nbsp;&nbsp;&nbsp;_running&nbsp;=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">YES</span>;<br>}<br><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)suspend&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(!_running)&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_suspend(_timer);<br>&nbsp;&nbsp;&nbsp;&nbsp;_running&nbsp;=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">NO</span>;<br>}<br><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)invalidate&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_semaphore_wait(_semaphore,&nbsp;DISPATCH_TIME_FOREVER);<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(_valid)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dispatch_source_cancel(_timer);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_timer&nbsp;=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">NULL</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_target&nbsp;=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">nil</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_userInfo&nbsp;=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">nil</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_valid&nbsp;=&nbsp;<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">NO</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;dispatch_semaphore_signal(_semaphore);<br>}<br><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>)userInfo&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;lock(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">id</span>&nbsp;ui&nbsp;=&nbsp;_userInfo)&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;ui;<br>}<br><br>-&nbsp;(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)repeats&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;lock(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>&nbsp;re&nbsp;=&nbsp;_repeats)&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;re;<br>}<br><br>-&nbsp;(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>)timeInterval&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;lock(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimeInterval</span>&nbsp;ti&nbsp;=&nbsp;_timeInterval)&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;ti;<br>}<br><br>-&nbsp;(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>)isValid&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;lock(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">BOOL</span>&nbsp;va&nbsp;=&nbsp;_valid)&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">return</span>&nbsp;va;<br>}<br><br>-&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)dealloc&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;[<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;invalidate];<br>}<br><br>+&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)ss_executeBlockFromTimer:(SSTimer&nbsp;*)aTimer&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>&nbsp;(^block)(SSTimer&nbsp;*)&nbsp;=&nbsp;[aTimer&nbsp;userInfo];<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">if</span>&nbsp;(block)&nbsp;block(aTimer);<br>}<br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@end</span><br></code></pre></div>
+
+<p>这里我们使用了 <strong><code>__weak id _target</code></strong>,这样我们就内部就切断了这层循环引用问题，做到自主释放，外层使用方也不必关心，也不容易出现错误和内存泄漏. 具体的代码在<a href="https://github.com/SanLiangSan/SSTimer" target="_blank" rel="noopener">SSTimer下载</a>,需要的可以前去查看，目前内部也只是定义在<code>main queue</code>上执行任务，后续会添加关于不同<code>queue</code>上执行任务的<code>timer</code>方法。还请不吝赐教和点赞支持，谢谢。</p>
+
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <a data-url="http://yoursite.com/2020/03/03/dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/" data-id="ck7c25ilq0006i93f7ahgbjfq" class="article-share-link">
+                                            分享
+                                        </a>
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GCD/" rel="tag">GCD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/" rel="tag">IOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Timer/" rel="tag">Timer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/" rel="tag">objective-c</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+        
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/03/03/IOS-%E5%A4%A7%E8%AF%9D%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">IOS-大话多线程</div>
+      </a>
+    
+  </nav>
+
+
+            
+
+                
+                    
+                        
+  <div class="gitalk" id="gitalk-container"></div>
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+  
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '8d31e847912e72f68e33',
+      clientSecret: '76fa3dc57a75b49b32256fd881795d2d982aac43',
+      repo: 'gitalk',
+      owner: 'SanLiangSan',
+      admin: ['SanLiangSan'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+                            
+
+</article>
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 sanliangsan的博客</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="sanliangsan的博客"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>
