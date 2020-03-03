@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>IOS-KVO原理分析</title>
+    <url>/2020/03/03/IOS-KVO%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>IOS</tag>
+        <tag>KVO</tag>
+        <tag>objective-c</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IOS - 自定义KVC及其原理</title>
     <url>/2020/03/03/IOS-%E8%87%AA%E5%AE%9A%E4%B9%89KVC%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<p><code>KVC</code>就是键值对<code>Key-Value Coding</code>,它是苹果提供给我们处理对象的一种机制。通常我们对属性的操作会通过他的<code>set</code>和<code>get</code>方法，但是这需要我们指定相应的<code>setKey</code>或<code>getKey</code>等方法，随着属性列表的增长我们访问这些属性也必须如此。相反，<code>key-value coding</code>提供了一个简单的消息传递接口，允许我们通过这个统一的接口去改变所有的属性<a id="more"></a><code>(这其实就是我们通常用的json转model的原理)</code>。</p>
@@ -85,6 +95,11 @@
 <img src="https://user-gold-cdn.xitu.io/2020/2/15/17047369e9ac1856?w=1336&amp;h=856&amp;f=jpeg&amp;s=141474" alt style="border-radius: 0px 0px 5px 5px; display: block; margin: 20px auto; width: 85%; height: 100%; object-fit: contain; box-shadow: #84A1A8 0px 10px 15px;">
 
 ]]></content>
+      <tags>
+        <tag>IOS</tag>
+        <tag>objective-c</tag>
+        <tag>KVC</tag>
+      </tags>
   </entry>
   <entry>
     <title>拼搏,为了更好的明天</title>
