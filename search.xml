@@ -12,7 +12,7 @@
 <li>我们经常会为使用<code>NSTimer</code>出现的内存泄漏而烦恼,即使有解决方案，总感觉很别扭。</li>
 </ol>
 <p>为什么会内存泄漏呢？我们看一下<code>api</code>的描述：</p>
-<img src="https://user-gold-cdn.xitu.io/2020/2/29/17090ddbcf7c9ac2?w=980&amp;h=752&amp;f=png&amp;s=926300" alt style="display: block; margin: 0 auto; width: 100%; border-radius: 4px; margin-bottom: 25px;">
+<img src="https://s2.ax1x.com/2020/03/04/3oXnY9.jpg?w=1336&amp;h=856&amp;f=jpeg&amp;s=141474" alt style="border-radius: 0px 0px 5px 5px; display: block; margin: 20px auto; width: 90%; height: 100%; object-fit: contain; box-shadow: #84A1A8 0px 10px 15px;">
 
 <p><code>timer</code>会一直强引用<code>target</code>，直到<code>timer</code>调用<code>invalide</code>方法,在<code>[timer invalidate]</code>调用之前，<code>timer</code>和<code>vc</code>构成了<code>循环引用</code>的关系，所以在我们<code>vc</code>在退出当前页面的时候<code>dealloc</code>方法并不调用，所以不论我们的<code>timer</code>是<code>strong</code>还是<code>weak</code>都无济于事，因为<code>api</code>内部会强持有。</p>
 <p>网上有很多种方案去实现打破这种循环引用来解决内存泄漏问题，这里我们从<code>自定义timer</code>说起,自定义timer说到底就是用<code>dispatch_source</code>这套<code>api</code>去实现。</p>
@@ -45,8 +45,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>GCD</tag>
         <tag>objective-c</tag>
+        <tag>GCD</tag>
         <tag>Timer</tag>
       </tags>
   </entry>
