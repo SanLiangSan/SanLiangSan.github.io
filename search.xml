@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Dispatch_source之自定义timer</title>
-    <url>/2020/03/03/Dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/</url>
+    <url>/2020/03/03/dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/</url>
     <content><![CDATA[<p><code>NSTimer</code>可能大家都熟悉，他的<code>api</code>也都很简单，但是其使用过程并不容易，相信用过的同学都踩过坑。<a id="more"></a>通常我们这么用:</p>
 <div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="objectivec language-objectivec hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;"><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;定义</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@property</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nonatomic</span>,&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">strong</span>)&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimer</span>&nbsp;*timer;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;使用</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>.timer&nbsp;=&nbsp;[<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimer</span>&nbsp;scheduledTimerWithTimeInterval:<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">1</span>&nbsp;target:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;selector:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@selector</span>(demo:)&nbsp;userInfo:<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">nil</span>&nbsp;repeats:<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">YES</span>];<br></code></pre></div>
 
@@ -183,8 +183,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>KVO</tag>
         <tag>objective-c</tag>
+        <tag>KVO</tag>
       </tags>
   </entry>
   <entry>
@@ -270,8 +270,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>KVO</tag>
         <tag>objective-c</tag>
+        <tag>KVO</tag>
       </tags>
   </entry>
   <entry>

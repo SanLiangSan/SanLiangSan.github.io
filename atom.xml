@@ -18,8 +18,8 @@
   
   <entry>
     <title>Dispatch_source之自定义timer</title>
-    <link href="http://yoursite.com/2020/03/03/Dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/"/>
-    <id>http://yoursite.com/2020/03/03/Dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/</id>
+    <link href="http://yoursite.com/2020/03/03/dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/"/>
+    <id>http://yoursite.com/2020/03/03/dispatch-source-%E8%87%AA%E5%AE%9A%E4%B9%89timer/</id>
     <published>2020-03-03T15:19:18.000Z</published>
     <updated>2020-03-04T15:29:04.621Z</updated>
     
@@ -90,9 +90,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
-    
       <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
+    
+      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
     
   </entry>
   
@@ -115,9 +115,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
-    
       <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
+    
+      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
     
   </entry>
   
