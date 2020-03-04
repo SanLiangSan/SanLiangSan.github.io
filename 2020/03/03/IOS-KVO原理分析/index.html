@@ -121,7 +121,7 @@
 <p>Automatic key-value observing is implemented using a technique  called isa-swizzling.    When an observer is registered for an attribute of an object the isa pointer of the observed object is modified, pointing to an intermediate class rather than at the true class. As a result the value of the isa pointer does not necessarily reflect the actual class of the instance.    You should never rely on the isa pointer to determine class membership. Instead, you should use the class method to determine the class of an object instance.</p>
 </blockquote>
 <h3 id="动态子类"><a href="#动态子类" class="headerlink" title="动态子类"></a>动态子类</h3><p><code>KVO</code>底层的实现是运用了一项 <code>isa-swizzling</code> 的技术,当我们添加观察者的时候，系统动态的给我们的对象创建了一个子类，将对象的<code>isa</code>指向了动态子类，而<code>KVO</code>的所有实现都是通过这个动态子类的，添加一个动态子类让类的职责更单一具体，而且让我们的<code>KVO</code>透明化，创建动态子类的过程我们是无法感知的，同时我们也知道了获取一个类不能通过<code>isa</code>的指向而是要看<code>class</code>的方法返回。多说无益，我们验证一下：</p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px;"><img src="https://user-gold-cdn.xitu.io/2020/2/19/170594af541ae63c?w=1682&amp;h=894&amp;f=png&amp;s=212830" alt style="border-radius: 0px 0px 5px 5px; display: block; margin: 20px auto; width: 85%; height: 100%; object-fit: contain; box-shadow: #84A1A8 0px 10px 15px;"></figure>
+<img src="https://s2.ax1x.com/2020/03/04/3oOUMV.jpg?w=1376&amp;h=952&amp;f=png&amp;s=562409" alt style="border-radius: 0px 0px 5px 5px; display: block; margin: 20px auto; width: 100%; height: 80%; object-fit: contain; box-shadow: #84A1A8 0px 10px 15px;">
 
 <p>还是同样的代码，我们看到添加观察者之前，<code>isa</code>指向<code>SSBoy</code>，但是添加观察者之后就指向一个叫<code>NSKVONotifying_SSBoy</code>的类，这正好验证了上述文档所说。</p>
 <h3 id="成员变量和属性"><a href="#成员变量和属性" class="headerlink" title="成员变量和属性"></a>成员变量和属性</h3><p><code>KVO</code>到底研究的是什么？</p>
@@ -132,7 +132,7 @@
 
 <p>最终我们的结果是不会触发，那么为什么成员变量的修改不会触发<code>KVO</code>，动态子类究竟都干了啥？</p>
 <h3 id="动态子类做了啥？"><a href="#动态子类做了啥？" class="headerlink" title="动态子类做了啥？"></a>动态子类做了啥？</h3><p>了解一个类我们无非是从属性，成员变量，方法等去研究，这里我们从方法入手，其他的大家可以下去一一验证。</p>
-<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px;"><img src="https://user-gold-cdn.xitu.io/2020/2/19/1705979d2cc39ecc?w=1692&amp;h=1176&amp;f=png&amp;s=393169" alt style="border-radius: 0px 0px 5px 5px; display: block; margin: 20px auto; width: 85%; height: 100%; object-fit: contain; box-shadow: #84A1A8 0px 10px 15px;"></figure>
+<img src="https://s2.ax1x.com/2020/03/04/3oOarT.jpg?w=1376&amp;h=952&amp;f=png&amp;s=562409" alt style="border-radius: 0px 0px 5px 5px; display: block; margin: 20px auto; width: 100%; height: 80%; object-fit: contain; box-shadow: #84A1A8 0px 10px 15px;">
 
 <p>我们去打印原类和动态子类的所有方法作以对比。</p>
 <ul>
@@ -168,7 +168,7 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://yoursite.com/2020/03/03/IOS-KVO%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" data-id="ck7dh9enx0002sg3f72c6h2ke" class="article-share-link">
+                                        <a data-url="http://yoursite.com/2020/03/03/IOS-KVO%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" data-id="ck7dhjxyb0002u33f7tr85wko" class="article-share-link">
                                             分享
                                         </a>
                                         
