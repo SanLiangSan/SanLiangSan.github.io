@@ -50,9 +50,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
-    
       <category term="GCD" scheme="http://yoursite.com/tags/GCD/"/>
+    
+      <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
     
       <category term="Timer" scheme="http://yoursite.com/tags/Timer/"/>
     
@@ -105,9 +105,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
-    
       <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
+    
+      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
     
   </entry>
   
@@ -130,9 +130,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
-    
       <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
+    
+      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
     
   </entry>
   
