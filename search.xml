@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>IOS多线程：GCD</title>
+    <url>/2020/03/05/IOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%9AGCD/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>Dispatch_Source Timer</title>
     <url>/2020/03/04/Dispatch-Source-Timer/</url>
     <content><![CDATA[<p><code>NSTimer</code>可能大家都熟悉，他的<code>api</code>也都很简单，但是其使用过程并不容易，相信用过的同学都踩过坑。<a id="more"></a>通常我们这么用:</p>
