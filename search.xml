@@ -6,8 +6,8 @@
     <content><![CDATA[<a id="more"></a>]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>objective-c</tag>
         <tag>GCD</tag>
+        <tag>objective-c</tag>
       </tags>
   </entry>
   <entry>
@@ -55,8 +55,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>objective-c</tag>
         <tag>GCD</tag>
+        <tag>objective-c</tag>
         <tag>Timer</tag>
       </tags>
   </entry>
