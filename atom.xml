@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Typeco</title>
   
-  <subtitle>别告诉别人你不开心 | 勤奋点做事 | 没什么事便早点回家睡觉去啊</subtitle>
+  <subtitle>别告诉别人你不开心 | 勤奋点做事 | 没什么事便早点回家睡觉去</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -111,9 +111,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
-    
       <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
+    
+      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
     
   </entry>
   
@@ -136,9 +136,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
-    
       <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
+    
+      <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
     
   </entry>
   
