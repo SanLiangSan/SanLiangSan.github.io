@@ -172,12 +172,15 @@
                                                                         
                                     </div>
                                     <footer class="article-footer">
-                                        <a data-url="http://typeco.cn/2020/03/03/IOS-%E8%87%AA%E5%AE%9A%E4%B9%89KVC%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86/" data-id="ck7hnhmwx0012p13f772f3luv" class="article-share-link">
+                                        <!-- <a data-url="http://typeco.cn/2020/03/03/IOS-%E8%87%AA%E5%AE%9A%E4%B9%89KVC%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86/" data-id="ck7homyb70012zp3f1zfj4mle" class="article-share-link">
                                             分享
-                                        </a>
+                                        </a> -->
                                         
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOS/" rel="tag">IOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KVC/" rel="tag">KVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/" rel="tag">objective-c</a></li></ul>
 
+                                        
+                                            <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束&nbsp;<i class="fe fe-smile"></i>&nbsp;感谢您的阅读 -------------</div>
+                                        
                                     </footer>
 
     </div>
@@ -208,33 +211,42 @@
 
                 
                     
-                        
-  <div class="gitalk" id="gitalk-container"></div>
+  <div class="comment_headling"  style="margin-top:5rem;">
+	<font size="5"><i class="fe fe-comments"></i> 评论</font>
+  </div>
+  <div class="comment"></div>
   
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 
   
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-  
-<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="/js/Valine.min.js"></script>
 
   <script type="text/javascript">
-    var gitalk = new Gitalk({
-      clientID: '8d31e847912e72f68e33',
-      clientSecret: '76fa3dc57a75b49b32256fd881795d2d982aac43',
-      repo: 'gitalk',
-      owner: 'SanLiangSan',
-      admin: ['SanLiangSan'],
-      // id: location.pathname,      // Ensure uniqueness and length less than 50
-      id: md5(location.pathname),
-      distractionFreeMode: false,  // Facebook-like distraction free mode
-      pagerDirection: 'last'
-    })
-
-  gitalk.render('gitalk-container')
+  // https://cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js
+  GUEST_INFO = ["nick", "mail", "link"],
+  guest_info = "nick,mail,link".split(",").filter(function(i) {
+		return - 1 < GUEST_INFO.indexOf(i)
+  });
+  guest_info = 0 == guest_info.length ? GUEST_INFO: guest_info,
+  new Valine({
+	 // AV 对象来自上面引入av-min.js
+	 av: AV, 
+	 el: '.comment',
+	 app_id: '', 
+	 app_key: '', 
+	 placeholder: '记得留下您的昵称和邮箱...可以快速收到回复ヾﾉ≧∀≦)o',
+	 meta: guest_info,
+	 notify: true,
+	 verify: false,
+	 avatar: 'mp',
+	 recordIP: true,
+	 visitor: ,
+	 lang: 'zh-cn'
+  });
   </script>
 
+
+                        
                             
 
 </article>
