@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-07T03:33:37.861Z</updated>
+  <updated>2020-03-07T03:39:01.671Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,13 +21,19 @@
     <link href="http://yoursite.com/2020/03/05/IOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%9AGCD/"/>
     <id>http://yoursite.com/2020/03/05/IOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%9AGCD/</id>
     <published>2020-03-05T11:48:42.000Z</published>
-    <updated>2020-03-07T03:33:37.861Z</updated>
+    <updated>2020-03-07T03:39:01.671Z</updated>
     
     <summary type="html">
     
     </summary>
     
     
+    
+      <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
+    
+      <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
+    
+      <category term="GCD" scheme="http://yoursite.com/tags/GCD/"/>
     
   </entry>
   
@@ -105,9 +111,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
-    
       <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
+    
+      <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
     
   </entry>
   
@@ -130,9 +136,9 @@
     
       <category term="IOS" scheme="http://yoursite.com/tags/IOS/"/>
     
-      <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
-    
       <category term="KVO" scheme="http://yoursite.com/tags/KVO/"/>
+    
+      <category term="objective-c" scheme="http://yoursite.com/tags/objective-c/"/>
     
   </entry>
   
