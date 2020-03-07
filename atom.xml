@@ -38,9 +38,9 @@
     
       <category term="IOS" scheme="http://typeco.cn/tags/IOS/"/>
     
-      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
-    
       <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
+    
+      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
     
   </entry>
   
@@ -63,9 +63,9 @@
     
       <category term="IOS" scheme="http://typeco.cn/tags/IOS/"/>
     
-      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
-    
       <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
+    
+      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
     
       <category term="Timer" scheme="http://typeco.cn/tags/Timer/"/>
     
