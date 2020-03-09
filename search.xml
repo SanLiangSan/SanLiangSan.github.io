@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>IOS多线程：GCD</title>
-    <url>/2020/03/05/IOS%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%9AGCD/</url>
+    <url>/posts/29927.html</url>
     <content><![CDATA[<p><code>GCD</code>全称 <code>Grand Central Dispatch</code>,是Apple开发的一个多核编程解决办法<a id="more"></a>。该方法在Mac OSX 10.6 雪豹 中首次推出，随后引入到IOS4.0中。GCD是一个替代<code>NSThread</code>，<code>NSOperationQueue</code>等技术的方案。</p>
 <h2 id="GCD初探"><a href="#GCD初探" class="headerlink" title="GCD初探"></a>GCD初探</h2><p>通常我们这么用：</p>
 <div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="hljs cpp" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;"><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;1.队列</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">dispatch_queue_t</span>&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">queue</span>&nbsp;=&nbsp;dispatch_queue_create(<span class="hljs-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(184, 187, 38); word-wrap: inherit !important; word-break: inherit !important;">"Typeco"</span>,&nbsp;DISPATCH_QUEUE_CONCURRENT);<br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;2.任务:无参数，无返回值</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>(^block)(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">void</span>)&nbsp;=&nbsp;^{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NSLog(@<span class="hljs-string" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(184, 187, 38); word-wrap: inherit !important; word-break: inherit !important;">"这是要执行的任务"</span>);<br>};<br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;3.函数</span><br>dispatch_async(<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">queue</span>,&nbsp;block);<br></code></pre></div>
@@ -87,7 +87,7 @@
   </entry>
   <entry>
     <title>Dispatch_Source Timer</title>
-    <url>/2020/03/04/Dispatch-Source-Timer/</url>
+    <url>/posts/47260.html</url>
     <content><![CDATA[<p><code>NSTimer</code>大家都熟悉，他的<code>api</code>也都很简单，但是其使用过程并不容易<a id="more"></a>  ，相信用过的同学都踩过坑。通常我们这么用:</p>
 <div class="output_wrapper" id="output_wrapper_id" style="font-size: 16px; color: rgb(62, 62, 62); line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;"><pre style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px;"><code class="objectivec language-objectivec hljs" style="overflow-wrap: break-word; margin: 0px 2px; line-height: 15px; font-size: 11px; font-weight: normal; word-spacing: -3px; letter-spacing: 0px; font-family: Consolas, Inconsolata, Courier, monospace; border-radius: 0px; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178); white-space: pre !important; word-wrap: normal !important; word-break: normal !important; overflow: auto !important; display: -webkit-box !important;"><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;定义</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@property</span>&nbsp;(<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">nonatomic</span>,&nbsp;<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">strong</span>)&nbsp;<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimer</span>&nbsp;*timer;<br><br><span class="hljs-comment" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(146, 131, 116); font-style: italic; word-wrap: inherit !important; word-break: inherit !important;">//&nbsp;使用</span><br><span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>.timer&nbsp;=&nbsp;[<span class="hljs-built_in" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(131, 165, 152); word-wrap: inherit !important; word-break: inherit !important;">NSTimer</span>&nbsp;scheduledTimerWithTimeInterval:<span class="hljs-number" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">1</span>&nbsp;target:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">self</span>&nbsp;selector:<span class="hljs-keyword" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(251, 73, 52); word-wrap: inherit !important; word-break: inherit !important;">@selector</span>(demo:)&nbsp;userInfo:<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">nil</span>&nbsp;repeats:<span class="hljs-literal" style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; color: rgb(211, 134, 155); word-wrap: inherit !important; word-break: inherit !important;">YES</span>];<br></code></pre></div>
 
@@ -137,7 +137,7 @@
   </entry>
   <entry>
     <title>IOS-自定义KVO</title>
-    <url>/2020/03/03/IOS-%E8%87%AA%E5%AE%9A%E4%B9%89KVO/</url>
+    <url>/posts/37336.html</url>
     <content><![CDATA[<p>之前写了一篇<a href="https://juejin.im/post/5e4bf0a16fb9a07cc97d94c1" target="_blank" rel="noopener">kvo原理探索</a>，今天我们来自己动手实现它的逻辑<a id="more"></a>，这样我们对<code>kvo</code>的认识会更深刻一些。</p>
 <p>我们根据系统<code>kvo</code>的使用，我们需要定义以下接口:</p>
 <ul>
@@ -185,7 +185,7 @@
   </entry>
   <entry>
     <title>IOS-KVO原理分析</title>
-    <url>/2020/03/03/IOS-KVO%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/</url>
+    <url>/posts/53048.html</url>
     <content><![CDATA[<p><code>KVO</code>一直是<code>IOS</code>面试中的重点，下面的面试题你碰到过吗?<a id="more"></a></p>
 <ul>
 <li><code>KVO</code>的底层是如何实现的？ </li>
@@ -272,7 +272,7 @@
   </entry>
   <entry>
     <title>IOS - 自定义KVC及其原理</title>
-    <url>/2020/03/03/IOS-%E8%87%AA%E5%AE%9A%E4%B9%89KVC%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86/</url>
+    <url>/posts/37760.html</url>
     <content><![CDATA[<p><code>KVC</code>就是键值对<code>Key-Value Coding</code>,它是苹果提供给我们处理对象的一种机制<a id="more"></a>。通常我们对属性的操作会通过他的<code>set</code>和<code>get</code>方法，但是这需要我们指定相应的<code>setKey</code>或<code>getKey</code>等方法，随着属性列表的增长我们访问这些属性也必须如此。相反，<code>key-value coding</code>提供了一个简单的消息传递接口，允许我们通过这个统一的接口去改变所有的属性<code>(这其实就是我们通常用的json转model的原理)</code>。</p>
 <img src="https://s2.ax1x.com/2020/03/02/3fMoan.jpg?w=1336&amp;h=856&amp;f=jpeg&amp;s=141474" alt style="border-radius: 0px 0px 5px 5px; display: block; margin: 20px auto; width: 65%; height: 100%; object-fit: contain; box-shadow: #84A1A8 0px 10px 15px;">
 
@@ -363,7 +363,7 @@
   </entry>
   <entry>
     <title>拼搏,为了更好的明天</title>
-    <url>/2020/03/02/%E5%8D%9A%E5%AE%A2%E5%88%9D%E5%BB%BA/</url>
+    <url>/posts/55624.html</url>
     <content><![CDATA[<p>2020年3月2日：花了半天的时间，终于把自己的博客搭建好了，新的地方,新的开始，希望自己能持续的输出…</p>
 ]]></content>
   </entry>
