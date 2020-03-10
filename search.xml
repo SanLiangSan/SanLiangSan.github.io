@@ -53,7 +53,8 @@
 <li>异步是多线程的代名词</li>
 </ul>
 </li>
-<li><p>几种情况 </p>
+<li><p>线程和队列的关系</p>
+<p>具体测试可前往  <a href="https://github.com/SanLiangSan/GCD_Demo" target="_blank" rel="noopener">Demo</a> 进行下载！</p>
 <table>
 <thead>
 <tr>
@@ -76,9 +77,11 @@
 <td align="left">1.不会开启新线程，依旧在主线程串行执行任务</td>
 </tr>
 </tbody></table>
+<p>由此可见，线程和队列并没有直接联系。</p>
 </li>
 </ul>
-]]></content>
+<h2 id="队列的创建"><a href="#队列的创建" class="headerlink" title="队列的创建"></a>队列的创建</h2><p>首先可以去  <a href="https://github.com/SanLiangSan/libdispatch-1008.220.2" target="_blank" rel="noopener">GCD源码</a> 进行下载查看。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
       <tags>
         <tag>IOS</tag>
         <tag>objective-c</tag>
