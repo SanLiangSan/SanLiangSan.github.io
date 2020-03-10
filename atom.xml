@@ -18,8 +18,8 @@
   
   <entry>
     <title>IOS多线程：GCD</title>
-    <link href="http://typeco.cn/posts/75a58621.html"/>
-    <id>http://typeco.cn/posts/75a58621.html</id>
+    <link href="http://typeco.cn/posts/75a58621/"/>
+    <id>http://typeco.cn/posts/75a58621/</id>
     <published>2020-03-05T11:48:42.000Z</published>
     <updated>2020-03-09T07:14:05.290Z</updated>
     
@@ -35,16 +35,16 @@
     
       <category term="IOS" scheme="http://typeco.cn/tags/IOS/"/>
     
-      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
-    
       <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
+    
+      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
     
   </entry>
   
   <entry>
     <title>Dispatch_Source Timer</title>
-    <link href="http://typeco.cn/posts/f4f4954f.html"/>
-    <id>http://typeco.cn/posts/f4f4954f.html</id>
+    <link href="http://typeco.cn/posts/f4f4954f/"/>
+    <id>http://typeco.cn/posts/f4f4954f/</id>
     <published>2020-03-04T15:42:49.000Z</published>
     <updated>2020-03-09T05:52:15.426Z</updated>
     
@@ -60,9 +60,9 @@
     
       <category term="IOS" scheme="http://typeco.cn/tags/IOS/"/>
     
-      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
-    
       <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
+    
+      <category term="GCD" scheme="http://typeco.cn/tags/GCD/"/>
     
       <category term="Timer" scheme="http://typeco.cn/tags/Timer/"/>
     
@@ -70,8 +70,8 @@
   
   <entry>
     <title>IOS-自定义KVO</title>
-    <link href="http://typeco.cn/posts/720c1794.html"/>
-    <id>http://typeco.cn/posts/720c1794.html</id>
+    <link href="http://typeco.cn/posts/720c1794/"/>
+    <id>http://typeco.cn/posts/720c1794/</id>
     <published>2020-03-03T13:24:29.000Z</published>
     <updated>2020-03-09T05:52:22.604Z</updated>
     
@@ -87,16 +87,16 @@
     
       <category term="IOS" scheme="http://typeco.cn/tags/IOS/"/>
     
-      <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
-    
       <category term="KVO" scheme="http://typeco.cn/tags/KVO/"/>
+    
+      <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
     
   </entry>
   
   <entry>
     <title>IOS-KVO原理分析</title>
-    <link href="http://typeco.cn/posts/b1edd5d4.html"/>
-    <id>http://typeco.cn/posts/b1edd5d4.html</id>
+    <link href="http://typeco.cn/posts/b1edd5d4/"/>
+    <id>http://typeco.cn/posts/b1edd5d4/</id>
     <published>2020-03-03T07:56:31.000Z</published>
     <updated>2020-03-09T05:52:25.087Z</updated>
     
@@ -112,16 +112,16 @@
     
       <category term="IOS" scheme="http://typeco.cn/tags/IOS/"/>
     
-      <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
-    
       <category term="KVO" scheme="http://typeco.cn/tags/KVO/"/>
+    
+      <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
     
   </entry>
   
   <entry>
     <title>IOS - 自定义KVC及其原理</title>
-    <link href="http://typeco.cn/posts/373151.html"/>
-    <id>http://typeco.cn/posts/373151.html</id>
+    <link href="http://typeco.cn/posts/373151/"/>
+    <id>http://typeco.cn/posts/373151/</id>
     <published>2020-03-03T05:12:01.000Z</published>
     <updated>2020-03-09T06:04:32.305Z</updated>
     
@@ -145,8 +145,8 @@
   
   <entry>
     <title>拼搏,为了更好的明天</title>
-    <link href="http://typeco.cn/posts/df8cda05.html"/>
-    <id>http://typeco.cn/posts/df8cda05.html</id>
+    <link href="http://typeco.cn/posts/df8cda05/"/>
+    <id>http://typeco.cn/posts/df8cda05/</id>
     <published>2020-03-02T03:32:02.000Z</published>
     <updated>2020-03-09T05:52:12.167Z</updated>
     
