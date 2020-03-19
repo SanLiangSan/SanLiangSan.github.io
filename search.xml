@@ -222,7 +222,7 @@
   <entry>
     <title>IOS-自定义KVO</title>
     <url>/posts/720c1794/</url>
-    <content><![CDATA[<p>之前写了一篇<a href="https://juejin.im/post/5e4bf0a16fb9a07cc97d94c1" target="_blank" rel="noopener">kvo原理探索</a>，今天我们来自己动手实现它的逻辑<a id="more"></a>，这样我们对<code>kvo</code>的认识会更深刻一些。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>之前写了一篇<a href="https://juejin.im/post/5e4bf0a16fb9a07cc97d94c1" target="_blank" rel="noopener">kvo原理探索</a>，今天我们来自己动手实现它的逻辑<a id="more"></a>，这样我们对<code>kvo</code>的认识会更深刻一些。</p>
 <p>我们根据系统<code>kvo</code>的使用，我们需要定义以下接口:</p>
 <ul>
 <li>添加观察者</li>
