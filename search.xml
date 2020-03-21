@@ -3,7 +3,7 @@
   <entry>
     <title>IOS-@synchronized</title>
     <url>/posts/9b4341e4/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在IOS开发中，同步锁相信大家都使用过，即  <strong><code>@synchronized</code>  *<em>,这篇文章向大家介绍一些 *</em><code>@synchronized</code></strong> 的原理和使用。<a id="more"></a></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在IOS开发中，同步锁相信大家都使用过，即  <strong><code>@synchronized</code></strong> ,这篇文章向大家介绍一些 <strong><code>@synchronized</code></strong>的原理和使用。<a id="more"></a></p>
 <h2 id="synchronized-原理"><a href="#synchronized-原理" class="headerlink" title="@synchronized 原理"></a>@synchronized 原理</h2><p><strong><code>@synchronized</code></strong> 是IOS多线程同步中性能最差的:</p>
 <img src="https://s1.ax1x.com/2020/03/22/84kAr8.jpg?w=1336&amp;h=856&amp;f=jpeg&amp;s=141474" alt style="border-radius: 0px 0px 0px 0px; display: block; margin: 10px auto; width: 85%; height: 100%; object-fit: contain; box-shadow: #84A1A2 0px 5px 5px;">
 
