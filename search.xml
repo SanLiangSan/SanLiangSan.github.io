@@ -52,6 +52,12 @@
 <li><code>atomic</code> 并不是绝对线程安全，它能保证代码进入 <code>getter</code> 和 <code>setter</code> 方法的时候是安全的，但是并不能保证多线程的访问情况下是安全的，一旦出了 <code>getter</code> 和 <code>setter</code> 方法，其线程安全就要由程序员自己来把握，所以 <code>atomic</code> 属性和线程安全并没有必然联系。</li>
 </ul>
 ]]></content>
+      <tags>
+        <tag>IOS</tag>
+        <tag>objective-c</tag>
+        <tag>atomic</tag>
+        <tag>自旋锁</tag>
+      </tags>
   </entry>
   <entry>
     <title>IOS-@synchronized</title>
