@@ -154,7 +154,7 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="KVO与KVC"><a href="#KVO与KVC" class="headerlink" title="KVO与KVC"></a>KVO与KVC</h3><p>之前的一篇文章 <a href="https://juejin.im/post/5e45360d51882549755810e8" target="_blank" rel="noopener">KVC原理与自定义</a> 有讲述<code>KVC</code>底层是如何一步一步实现修改对象的属性的，那么问题来了，<code>KVC</code>会触发<code>KVO</code>吗，仔细阅读<code>KVO</code>官方文档我们看到一段话：</p>
+<h3 id="KVO与KVC"><a href="#KVO与KVC" class="headerlink" title="KVO与KVC"></a>KVO与KVC</h3><p>之前的一篇文章 <a href="https://typeco.cn/posts/373151/">KVC原理与自定义</a> 有讲述<code>KVC</code>底层是如何一步一步实现修改对象的属性的，那么问题来了，<code>KVC</code>会触发<code>KVO</code>吗，仔细阅读<code>KVO</code>官方文档我们看到一段话：</p>
 <blockquote>
 <p>NSObject provides a basic implementation of automatic ke y-value change notification. Automatic key-value change no tification informs observers of changes made using key-val ue compliant accessors, as well as the key-value coding me thods. Automatic notification is also supported by the col lection proxy objects returned by, for example, mutableAr rayValueForKey:</p>
 </blockquote>
