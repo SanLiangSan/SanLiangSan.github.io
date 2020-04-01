@@ -98,7 +98,7 @@
 
 <p>外层循环n次，内层循环n次，加在一起就是 <code>n*n = n^2</code> 次,所以其时间复杂度为 <code>O(n^2)</code></p>
 <blockquote>
-<p><code>O(1)&lt;O(logn)&lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</code></p>
+<p><code>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</code></p>
 </blockquote>
 <p>其实我们只用关注前面的复杂度就行了，如果你的算法时间复杂度像后面的那几位靠齐，也就没啥好说的了，指数级的增长还是蛮恐怖的。</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>算法设计有一个重要原则： <code>空间 时间 权衡</code></p>
