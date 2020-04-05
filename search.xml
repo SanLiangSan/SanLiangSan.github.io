@@ -22,7 +22,7 @@
 <h3 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h3><p>既然链表的节点已经定义而且链表的数据结构已经初始化，接下来我们看看如何去添加元素，这里我们看两种情况：</p>
 <ul>
 <li><p><strong>不带头节点的单链表</strong></p>
-<img src="https://s1.ax1x.com/2020/04/05/GDNJyD.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:50%;" />
+<img src="https://s1.ax1x.com/2020/04/05/GryNl9.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:50%;" />
 
 </li>
 </ul>
