@@ -89,7 +89,7 @@
 
 
                                                 
-                                                                    <p>说到 <strong><code>Block</code></strong>，我们经常容易想到的就是：<code>copy</code>、<code>循环引用</code>。那么 <code>Block</code> 的本质究竟是什么，为什么要用 <code>copy</code> 来修饰，还有什么情况下会导致循环引用，我们该如何避免<a id="more"></a>。这篇文章带着大家一起探讨一下 <code>Block</code> 的底层实现与使用 。</p>
+                                                                    <p>说到 <strong><code>Block</code></strong>，我们经常容易想到的就是：<code>copy</code>、<code>循环引用</code>。那么 <code>Block</code> 的本质究竟是什么，为什么要用 <code>copy</code> 来修饰，还有什么情况下会导致循环引用，我们该如何避免。这篇文章带着大家一起探讨一下 <code>Block</code> 的底层实现与使用<a id="more"></a> 。</p>
 <h2 id="Block初探"><a href="#Block初探" class="headerlink" title="Block初探"></a>Block初探</h2><p><code>Block</code> 就是<code>Objective-C</code> 对于 <code>闭包</code>的实现 </p>
 <blockquote>
 <p><code>闭包</code> = 一个函数「或指向函数的指针」 + 该函数执行的外部的上下文变量「也叫自由变量」</p>
