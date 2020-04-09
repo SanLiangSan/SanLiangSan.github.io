@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据结构与算法 - 双向链表</title>
+    <url>/posts/9336f4e5/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>算法</tag>
+        <tag>c</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构与算法 - 单链表</title>
     <url>/posts/490f9e50/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>对于非空的线性表和线性结构，具有以下特点：</p>
@@ -10,7 +20,7 @@
 <li>除了第一个元素以外，其他每个数据元素都有 <strong><code>一个前驱</code></strong></li>
 <li>除了最后一个元素以外，其他每个数据元素都有 <strong><code>一个后继</code></strong></li>
 </ul>
-<p>线性表是最基本也是最常用的一种线性结构，同时它也是其他数据结构的基础。尤其是 <strong>单链表</strong> ，这篇文章主要讲述一下单链表的结构以及如何用 <strong>C语言</strong> 实现一个单链表。<a href="[https://github.com/SanLiangSan/mydemo/tree/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%841](https://github.com/SanLiangSan/mydemo/tree/master/数据结构1)">下载代码</a></p>
+<p>线性表是最基本也是最常用的一种线性结构，同时它也是其他数据结构的基础。尤其是 <strong>单链表</strong> ，这篇文章主要讲述一下单链表的结构以及如何用 <strong>C语言</strong> 实现一个单链表。<a href="https://github.com/SanLiangSan/mydemo" target="_blank" rel="noopener">下载代码</a></p>
 <img src="https://s1.ax1x.com/2020/04/03/GtcEZj.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:50%;" />
 
 <h2 id="单链表的实现"><a href="#单链表的实现" class="headerlink" title="单链表的实现"></a>单链表的实现</h2><p>单链表是一种线性数据结构，我们考察的主要是它的初始化、添加、删除、遍历等方法.</p>
