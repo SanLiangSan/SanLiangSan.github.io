@@ -3,7 +3,7 @@
   <entry>
     <title>数据结构与算法 - 栈</title>
     <url>/posts/d4934e3f/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>大家都知道函数都是存放在栈上，由系统帮我们管理，那么栈到底是一种什么样的数据结构呢？他是如何管理数据的？ 日常开发中我们或许并没有直接的用上栈这种数据结构，但是它却能帮我们解决一些很棘手的问题，这篇文章主要分享一下个人对栈的理解以及如何用 <strong>c</strong>去实现一个栈的结构<a id="more"></a>。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>我们都知道函数都是存放在栈上，由系统帮我们管理，那么栈到底是一种什么样的数据结构呢？他是如何管理数据的？ 日常开发中我们或许并没有直接的用上栈这种数据结构，但是它却能帮我们解决一些很棘手的问题，这篇文章主要分享一下个人对栈的理解以及如何用 <strong>c</strong>去实现一个栈的结构<a id="more"></a>。本文涉及的代码可以前往 <a href="https://github.com/SanLiangSan/mydemo" target="_blank" rel="noopener">示例代码</a> 处查看。</p>
 <h2 id="栈结构"><a href="#栈结构" class="headerlink" title="栈结构"></a>栈结构</h2><p>栈结构就像一个桶一样，我们可以往桶里边塞东西，但是往往后塞进去的东西会在最上面，所以当我们取东西的时候往往先取出最后放进去的东西，如图:</p>
 <img src="https://s1.ax1x.com/2020/04/12/GL3dQx.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:50%;" />
 
