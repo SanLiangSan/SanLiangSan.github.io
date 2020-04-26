@@ -98,7 +98,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">上面BF算法我们可以发现我们需要去遍历每一个字符，有那么一种情况是：</span><br><span class="line">S &#x3D; &quot;aaaaaaaaaaaaaaaabdhsdf&quot;</span><br><span class="line">T &#x3D; &quot;aaaaaaaab&quot;</span><br><span class="line">这个时候我们会发现每次都是在最后一位发现不同，这样我们其实浪费了很多次循环,这样就出现了另外一中算法：RK算法</span><br></pre></td></tr></table></figure>
 
 <h2 id="RK算法"><a href="#RK算法" class="headerlink" title="RK算法"></a>RK算法</h2><p>⚛ <strong>RK算法</strong> 是由  Rabin 和 Karp 共同提出的一个算法，RK算法是对BF算法的一个改进，只进行一次比较就判定两者是否相等。RK的大体思想跟BF一样，把主串拆分成若干个子串，循环遍历每一个子串和目标串T进行比对，但是其利用了Hash算法的设计思想，每个子串都对应唯一一个哈希值，我们设计一个尽量不冲突的哈希算法来求每个子串的哈希值，一一匹配直到相等即可。</p>
-<h3 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h3><p>那么哈希算法如何设计呢？我们知道字符串的一一比较显然不如数字比较来的快</p>
+<h3 id="哈希函数设计"><a href="#哈希函数设计" class="headerlink" title="哈希函数设计"></a>哈希函数设计</h3><p>那么哈希算法如何设计呢？我们知道字符串的一一比较显然不如数字比较来的快</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">主串 S &#x3D; 6541451234   T &#x3D; 123  就是将123跟十进制651,541,414,145,451,512,123,234进行一一比较大小。</span><br></pre></td></tr></table></figure>
 
 <p>而对于十进制数来说</p>
