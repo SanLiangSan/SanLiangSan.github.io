@@ -5,10 +5,10 @@
     <url>/posts/b0f8e6ff/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>树</strong> 的结构在日常生活中我们有涉及到：比如我们的 <strong>族谱</strong>、<strong>公司的架构图</strong>等等，今天我们就具体看看树到底是一个什么样的数据结构，它有哪些分类以及如何去实现树。<a id="more"></a></p>
 <h2 id="树结构"><a href="#树结构" class="headerlink" title="树结构"></a>树结构</h2><p>树结构包含一个跟节点以及若干个子节点，以下描述了几种常见的树结构图。</p>
-<h3 id="一般树"><a href="#一般树" class="headerlink" title="一般树"></a>一般树</h3><img src="https://s1.ax1x.com/2020/04/26/Jc5ZlT.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:60%;" />
+<h3 id="一般树"><a href="#一般树" class="headerlink" title="一般树"></a>一般树</h3><img src="https://s1.ax1x.com/2020/04/26/Jc5ZlT.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
 
 <h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><p>每一个节点都两个子节点，它们分别被叫做 <code>左子树</code> 和 <code>右子树</code> ，这种树结构被称作 <code>二叉树</code>，结合其名字也知道，就是分叉只分了两个，如图：</p>
-<img src="https://s1.ax1x.com/2020/04/26/Jc5e6U.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:60%;" />
+<img src="https://s1.ax1x.com/2020/04/26/Jc5e6U.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
 
 <h4 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h4><img src="https://s1.ax1x.com/2020/04/26/Jc5VpV.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
 
