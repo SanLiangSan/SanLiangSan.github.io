@@ -111,7 +111,7 @@
 <img src="https://s1.ax1x.com/2020/05/09/YlSVFP.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:90%;" />
 
 <p>虽然标记开辟了空间，但是这个空间远小于增加额外两个子树的指针，同时它也实现了利用被浪费的空间，<strong>利用有限的空间去解决更多的事情</strong>。</p>
-<h2 id="线索二叉树的实现"><a href="#线索二叉树的实现" class="headerlink" title="线索二叉树的实现"></a>线索二叉树的实现</h2><p>通过上面的分析，我们的线索二叉树被优化后应该是类似一个循环链表的结构：</p>
+<h2 id="线索二叉树的实现"><a href="#线索二叉树的实现" class="headerlink" title="线索二叉树的实现"></a>线索二叉树的实现</h2><p>通过上面的分析，我们的线索二叉树被优化后应该是类似一个循环链表的结构(这里通过中序遍历为例)：</p>
 <img src="https://s1.ax1x.com/2020/05/09/YlSFeA.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
 
 <p>代码如下：</p>
