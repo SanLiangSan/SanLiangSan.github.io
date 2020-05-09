@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据结构与算法 - 图</title>
+    <url>/posts/25dd8ac7/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="初识图"><a href="#初识图" class="headerlink" title="初识图"></a>初识图</h2><h2 id="图的存储思考"><a href="#图的存储思考" class="headerlink" title="图的存储思考"></a>图的存储思考</h2><h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><h2 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h2><h3 id="深度优先"><a href="#深度优先" class="headerlink" title="深度优先"></a>深度优先</h3><h3 id="广度优先"><a href="#广度优先" class="headerlink" title="广度优先"></a>广度优先</h3>]]></content>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>算法</tag>
+        <tag>c</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构与算法 - 哈夫曼树</title>
     <url>/posts/140a00d4/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="哈夫曼（David-Huffman）"><a href="#哈夫曼（David-Huffman）" class="headerlink" title="哈夫曼（David Huffman）"></a>哈夫曼（David Huffman）</h2><blockquote>
