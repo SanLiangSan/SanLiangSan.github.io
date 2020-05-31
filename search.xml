@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>FlutterApi翻译</title>
+    <url>/posts/57395648/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在学习 <strong>Flutter</strong> ，自己在学习的过程中要不断的去查看系统 api，为了更加熟悉的了解其系统api，自己尝试去翻译其官网的api文档，作以记录以便查阅，此文会持续更新。<a id="more"></a></p>
+<h1 id="Material组件"><a href="#Material组件" class="headerlink" title="Material组件"></a>Material组件</h1><p>这是一个组件，其包含了视觉、行为、动作等非常丰富的 <code>widgets</code>小部件，它遵循 <code>Material Design</code> 的涉及准则.</p>
+<p>接下来我们对其包含的一些小部件进行一一分析.</p>
+<h1 id="应用程序结构和导航"><a href="#应用程序结构和导航" class="headerlink" title="应用程序结构和导航"></a>应用程序结构和导航</h1><h2 id="Appbar"><a href="#Appbar" class="headerlink" title="Appbar"></a>Appbar</h2><p><code>AppBar</code> 其实就是一个工具条，它由一些其他的小部件组成（比如<code>TabBar</code> 和 <code>FlexibleSpaceBar</code>）, <code>AppBars</code> 通常使用 <code>IconButtons</code> 来暴露一个或多个 <code>actions</code> ，或者通过 <code>PopupMenuButton</code> 来包装一系列的按钮动作（其实可以理解为溢出菜单）.</p>
+<p><code>AppBars</code> 通常是作为 <code>Scaffold.appBar</code> 的属性这样使用的，将<code>appbar</code>作为固定高度的小部件放置在屏幕的顶部来使用，如果你的顶部工具栏支持滚动，请参考 <code>SliverAppBar</code>,它是把 <code>AppBar</code>  嵌入到 <code>CustomScrollView</code> 中来实现滚动效果.</p>
+<p>如果不通过 <code>Scaffold.appBar</code> 这种方式或者将其包裹在 <code>Hero</code> 中时，要根据需要将 <code>app bar</code> 放置到<code>MediaQuery</code> 中以适配 <code>app bar</code> 周围的空间，因为它的 <code>padding</code> 等参数不受 <code>Scaffold</code> 控制.</p>
+<p>参照下图，<code>AppBar</code> 包含了 三块区域 。最上面是: <code>leading</code>,<code>title</code>,<code>actions</code> 中间是一个<code>flexibleSpace</code> 弹性空间，以及下面还可以配置一个 <code>bottom</code> ,一般 <code>bottom</code> 是一个 <code>TabBar</code>  的小部件，</p>
+<img src="https://flutter.github.io/assets-for-api-docs/assets/material/app_bar.png?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>如果 <code>leading</code> 小部件缺省，而且 <code>AppBar</code> 是通过 <code>Drawer</code>放到 <code>Scaffold</code> 中，那么就会有一个按钮被插入以打开drawer。否则，如果最近的 <code>Navigator</code>导航器有任何以前的路由，那么会有一个 <code>BackButton</code> 被替代插入。这种特性可以通过设置<code>automaticallyImplyLeading</code>   属性为 false。在这种情况下，如果leading小部件为空，标题部件就相应得到拉伸。</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyStatelessWidget</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  MyStatelessWidget(&#123;Key key&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Scaffold(</span><br><span class="line">      key: scaffoldKey,</span><br><span class="line">      appBar: AppBar(</span><br><span class="line">        title: <span class="keyword">const</span> Text(<span class="string">'AppBar Demo'</span>),</span><br><span class="line">        actions: &lt;Widget&gt;[</span><br><span class="line">          IconButton(</span><br><span class="line">            icon: <span class="keyword">const</span> Icon(Icons.add_alert),</span><br><span class="line">            tooltip: <span class="string">'Show Snackbar'</span>,</span><br><span class="line">            onPressed: () &#123;</span><br><span class="line">              scaffoldKey.currentState.showSnackBar(snackBar);</span><br><span class="line">            &#125;,</span><br><span class="line">          ),</span><br><span class="line">          IconButton(</span><br><span class="line">            icon: <span class="keyword">const</span> Icon(Icons.navigate_next),</span><br><span class="line">            tooltip: <span class="string">'Next page'</span>,</span><br><span class="line">            onPressed: () &#123;</span><br><span class="line">              openPage(context);</span><br><span class="line">            &#125;,</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">      body: <span class="keyword">const</span> Center(</span><br><span class="line">        child: Text(</span><br><span class="line">          <span class="string">'This is the home page'</span>,</span><br><span class="line">          style: TextStyle(fontSize: <span class="number">24</span>),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Scaffold"><a href="#Scaffold" class="headerlink" title="Scaffold"></a>Scaffold</h2><h2 id="BottomNavigationBar"><a href="#BottomNavigationBar" class="headerlink" title="BottomNavigationBar"></a>BottomNavigationBar</h2><h2 id="TabBar"><a href="#TabBar" class="headerlink" title="TabBar"></a>TabBar</h2><h2 id="MaterialApp"><a href="#MaterialApp" class="headerlink" title="MaterialApp"></a>MaterialApp</h2><p>应用程序使用 <code>material</code> 来设计.</p>
+<p>它是一个便利的小部件，集成了一系列的基础小部件，基于 <code>WdigetsApp</code> 然后通过添加类似 <code>AnimatedTheme</code> 和 <code>GridPaper</code> 这些类来实现<code>Material Design</code> 准则，行为和动作的 <code>Widget</code>。 </p>
+<p><code>MaterialApp</code>按照以下顺序搜索来配置其顶级导航器：</p>
+<ol>
+<li><code>home</code>属性不为空，就用<code>home</code>属性.</li>
+<li>否则，判断<code>routes</code> 表是否使用，而且这个路由表必须有内容.</li>
+<li>否则，判断<code>onGenerateRoute</code> 方法是否提供，如果实现了该方法，它应该返回一个非空值针对任何的路由，而且这些路由不受 <code>home</code> 和<code>routes</code> 控制.</li>
+<li>如果以上都无效，就会调用 <code>onUnknownRoute</code>方法.</li>
+</ol>
+<h2 id="SliverAppBar"><a href="#SliverAppBar" class="headerlink" title="SliverAppBar"></a>SliverAppBar</h2><h2 id="TabBarView"><a href="#TabBarView" class="headerlink" title="TabBarView"></a>TabBarView</h2><h2 id="WidgetsApp"><a href="#WidgetsApp" class="headerlink" title="WidgetsApp"></a>WidgetsApp</h2><h2 id="Drawer"><a href="#Drawer" class="headerlink" title="Drawer"></a>Drawer</h2>]]></content>
+      <tags>
+        <tag>Flutter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构与算法 - 图</title>
     <url>/posts/25dd8ac7/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="初识图"><a href="#初识图" class="headerlink" title="初识图"></a>初识图</h2><p>图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为 <strong><code>G[V,E]</code></strong> 其中G表示一个图，V是图G中的顶点集合，E是图G中边的集合。<a id="more"></a></p>
