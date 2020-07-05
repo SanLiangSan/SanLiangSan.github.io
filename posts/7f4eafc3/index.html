@@ -11,6 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
+    OpenGL：基础概念以及项目搭建 |
     
     Typeco</title>
   
@@ -32,204 +33,17 @@
 
 <body>
 <main class="content">
-  <section class="jumbotron">
-  <div class="video">
-    
-      <div class="video-frame">
-        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-      </div>
-    
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
-             poster="/images/ocean/ocean.png" x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">Typeco</a></h1>
-      <p>别告诉别人你不开心 | 勤奋点做事 | 最困难的时候 | 也就是我们离成功不远的时候</p>
-      <div><img src="/images/hexo-inverted.svg" class="brand" alt="Typeco"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
-  </div>
-</section>
-
-<div id="landingpage">
-  <a href="https://github.com/SanLiangSan" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:rgb(34, 34, 34); color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
   <section class="outer">
-    <article class="articles">
-      
-      <h1 class="page-type-title"></h1>
-      
-        
-          <article id="post-FlutterApi翻译" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article id="post-OpenGL：基础概念以及项目搭建" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
         
             <header class="article-header">
                 
   
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/57395648/">FlutterApi翻译</a>
-    </h2>
-  
-  
-  <div class="article-topping">
-    <i class="fe fe-umbrella"></i>
-  </div>
-
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/57395648/" class="article-date">
-  <time datetime="2020-05-30T14:52:52.000Z" itemprop="datePublished">2020-05-30</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/57395648/" rel="gallery_ckatrgi7h0000s7ic49g0agpe">
-            <img src="https://s1.ax1x.com/2020/05/30/tQ7gzT.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在学习 <strong>Flutter</strong> ，自己在学习的过程中要不断的去查看系统 api，为了更加熟悉的了解其系统api，自己尝试去翻译其官网的api文档，作以记录以便查阅，此文会持续更新。
-                                                        
-                                                            <a class="article-more-link" href="/posts/57395648/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/57395648/" data-id="ckatrgi7h0000s7ic49g0agpe" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-博客初建" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/df8cda05/">拼搏,为了更好的明天</a>
-    </h2>
-  
-  
-  <div class="article-topping">
-    <i class="fe fe-umbrella"></i>
-  </div>
-
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/df8cda05/" class="article-date">
-  <time datetime="2020-03-02T03:32:02.000Z" itemprop="datePublished">2020-03-02</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/df8cda05/" rel="gallery_ck98mek5g000a033tfxtv4tab">
-            <img src="https://s1.ax1x.com/2020/03/21/8RCNh8.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                                    <p>2020年3月1日：花了半天的时间，终于把自己的博客搭建好了，新的地方,新的开始，希望自己能持续的输出…</p>
-
-                                                                        
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/df8cda05/" data-id="ck98mek5g000a033tfxtv4tab" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-OpenGL：基础概念以及项目搭建" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/7f4eafc3/">OpenGL：基础概念以及项目搭建</a>
-    </h2>
+    <h1 class="article-title" itemprop="name">
+      OpenGL：基础概念以及项目搭建
+    </h1>
   
   
 
@@ -249,6 +63,14 @@
                     
 
                         
+                            
+    <div class="tocbot"></div>
+
+
+
+
+
+                                
 
                                     <div class="article-entry" itemprop="articleBody">
                                         
@@ -259,9 +81,7 @@
     <div class="article-gallery-photos">
       
         
-          <a class="article-gallery-img" href="/posts/7f4eafc3/" rel="gallery_ckc618tfo00007f3f5hf41eug">
-            <img src="https://s1.ax1x.com/2020/07/03/NXjkcD.jpg" itemprop="image">
-          </a>
+          <img src="https://s1.ax1x.com/2020/07/03/NXjkcD.jpg" itemprop="image">
         
       
     </div>
@@ -395,6 +215,8 @@
                                             分享
                                         </a> -->
                                         
+                                            <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束&nbsp;<i class="fe fe-smile"></i>&nbsp;感谢您的阅读 -------------</div>
+                                        
                                         
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li></ul>
 
@@ -403,559 +225,52 @@
     </div>
 
     
-
-                
-
-</article>
         
-          <article id="post-数据结构与算法-图" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/25dd8ac7/">数据结构与算法 - 图</a>
-    </h2>
-  
-  
+  <nav class="article-nav">
+    
+    
+      <a href="/posts/57395648/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">FlutterApi翻译</div>
+      </a>
+    
+  </nav>
 
 
-
-
-            </header>
             
 
                 
-                    <div class="article-meta">
-                        <a href="/posts/25dd8ac7/" class="article-date">
-  <time datetime="2020-05-10T05:23:17.000Z" itemprop="datePublished">2020-05-10</time>
-</a>
-                            
-                    </div>
                     
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/25dd8ac7/" rel="gallery_ck9zv6loa0000lk3f3t22d2lu">
-            <img src="https://s1.ax1x.com/2020/05/11/YGi5QI.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <h2 id="初识图"><a href="#初识图" class="headerlink" title="初识图"></a>初识图</h2><p>图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成。通常表示为 <strong><code>G[V,E]</code></strong> 其中G表示一个图，V是图G中的顶点集合，E是图G中边的集合。
-                                                        
-                                                            <a class="article-more-link" href="/posts/25dd8ac7/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/25dd8ac7/" data-id="ck9zv6loa0000lk3f3t22d2lu" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
+    <div class="vcomments" id="vcomments"></div>
     
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
 
-                
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 't2cDQfB0X6lIO2MruIMwGv7p-gzGzoHsz',
+                appKey: 'dUALGx7KEqTByT6fTlQ47xJf',
+                notify: 'false',
+                verify: 'true',
+                avatar: 'monsterid',
+                pageSize: '10',
+                placeholder: '记得留下您的昵称和邮箱...可以快速收到回复ヾﾉ≧∀≦)o'
+            })
+        </script>
+        
+                        
+                            
 
 </article>
-        
-          <article id="post-数据结构与算法-哈夫曼树" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/140a00d4/">数据结构与算法 - 哈夫曼树</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/140a00d4/" class="article-date">
-  <time datetime="2020-05-09T08:40:26.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/140a00d4/" rel="gallery_ck9zpfkba0000kz3f6dqt538m">
-            <img src="https://s1.ax1x.com/2020/05/10/Y1G05n.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <h2 id="哈夫曼（David-Huffman）"><a href="#哈夫曼（David-Huffman）" class="headerlink" title="哈夫曼（David Huffman）"></a>哈夫曼（David Huffman）</h2><blockquote>
-<p>著名的 <strong>哈夫曼编码</strong> 发明人 戴维·霍夫曼于1999年10月17日因癌症去世，享年74岁，他发明了著名的的 <strong>霍夫曼编码</strong>，除了霍夫曼编码以外，他还涉及出二叉最优搜索树的算法，因为其效率最高，所以被命名为霍夫曼算法，是动态规划的一个范例
-                                                        
-                                                            <a class="article-more-link" href="/posts/140a00d4/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/140a00d4/" data-id="ck9zpfkba0000kz3f6dqt538m" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-数据结构与算法-线索二叉树" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/fdf3e82a/">数据结构与算法 - 线索二叉树</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/fdf3e82a/" class="article-date">
-  <time datetime="2020-05-09T07:46:44.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/fdf3e82a/" rel="gallery_ck9zdifg20000c93fgqbffkvj">
-            <img src="https://s1.ax1x.com/2020/05/09/YQj82Q.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前我们讲过二叉树这种数据结构，在他的链式存储结构中我们采用了这种数据结构：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span>&#123;</span></span><br><span class="line">    <span class="comment">//数据</span></span><br><span class="line">    CElemType data;</span><br><span class="line">    <span class="comment">//左右孩子指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span>    </span><br><span class="line">&#125;BiThrNode</span><br></pre></td></tr></table></figure>
-                                                        
-                                                            <a class="article-more-link" href="/posts/fdf3e82a/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/fdf3e82a/" data-id="ck9zdifg20000c93fgqbffkvj" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-数据结构与算法-树" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/b0f8e6ff/">数据结构与算法 - 树</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/b0f8e6ff/" class="article-date">
-  <time datetime="2020-04-26T07:22:09.000Z" itemprop="datePublished">2020-04-26</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/b0f8e6ff/" rel="gallery_ck9gtbwgx0000ju3fbmbm34oo">
-            <img src="https://s1.ax1x.com/2020/04/26/JcfAfK.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <p><strong>树</strong> 的结构在日常生活中我们有涉及到：比如我们的 <strong>族谱</strong>、<strong>公司的架构图</strong>等等，今天我们就具体看看树到底是一个什么样的数据结构，它有哪些分类以及如何去实现树。
-                                                        
-                                                            <a class="article-more-link" href="/posts/b0f8e6ff/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/b0f8e6ff/" data-id="ck9gtbwgx0000ju3fbmbm34oo" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-数据结构与算法-字符串匹配" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/58f542ed/">数据结构与算法 - 字符串匹配</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/58f542ed/" class="article-date">
-  <time datetime="2020-04-21T13:24:30.000Z" itemprop="datePublished">2020-04-21</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/58f542ed/" rel="gallery_ck9a5s6ng0000au3f4ev8a2lk">
-            <img src="https://s1.ax1x.com/2020/04/21/JGLvGR.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <blockquote>
-<p>有主串 S = “abcacabdc”,模式串 T = “abd”,请查找出模式串在主串第一次出现的位置，注意：主串和模式串均为小写字母切都是合法输入。
-                                                        
-                                                            <a class="article-more-link" href="/posts/58f542ed/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/58f542ed/" data-id="ck9a5s6ng0000au3f4ev8a2lk" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-数据结构与算法-栈应用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/c9096fc3/">数据结构与算法 - 栈应用</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/c9096fc3/" class="article-date">
-  <time datetime="2020-04-19T11:10:52.000Z" itemprop="datePublished">2020-04-19</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/c9096fc3/" rel="gallery_ck98mek6l0021033t6bm39qbw">
-            <img src="https://s1.ax1x.com/2020/04/19/JKWvee.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <p>这篇文章主要罗列一些常见的算法题，涉及到栈的使用等。
-                                                        
-                                                            <a class="article-more-link" href="/posts/c9096fc3/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/c9096fc3/" data-id="ck98mek6l0021033t6bm39qbw" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-数据结构与算法-队列" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/485bf345/">数据结构与算法 - 队列</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/485bf345/" class="article-date">
-  <time datetime="2020-04-14T12:21:14.000Z" itemprop="datePublished">2020-04-14</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/485bf345/" rel="gallery_ck98mek5o000g033tetb83kbu">
-            <img src="https://s1.ax1x.com/2020/04/14/Jp9Ab9.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <p>之前分享了一篇关于栈这种数据结构的逻辑和实现，这篇文章我们看看队列这种数据结构是一种什么样的结构以及如何从顺序存储和链式存储去实现这么一个结构。</p>
-<p>队列也是一种线性数据结构，跟栈的结构差不多，唯一不同的的就是 <strong>栈是先进后出</strong> 而 <strong>队列是先进先出</strong> 也就是通常所说的 <strong>FIFO</strong> : <strong>first in first out !</strong>
-                                                        
-                                                            <a class="article-more-link" href="/posts/485bf345/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/485bf345/" data-id="ck98mek5o000g033tetb83kbu" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-    </article>
-    
-  
-    
-      <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
-      </nav>
-    
-  </section>
-</div>
-
+</section>
   <footer class="footer">
   <div class="outer">
     <div class="float-right">
       <ul class="list-inline">
   
-    <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
-  
     <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
   
 </ul>
     </div>
@@ -1047,6 +362,23 @@
 
 
 
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
 
 
 
