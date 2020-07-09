@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OpenGL：图像的渲染、撕裂、掉帧</title>
+    <url>/posts/86ed34e7/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>作为一个IOS开发者，日常我们更多的是接触业务，我们做的最多的是<code>addSubView:</code> 等等，那么我们的视图就显示出来了。那么它们是如何显示出来的，计算机内部是如何工作的，其底层原理是什么，有时候会卡顿掉帧，这些又究竟是什么原因？这篇文章来大概讲述一下这些内容。<a id="more"></a></p>
+<h2 id="CPU和GPU"><a href="#CPU和GPU" class="headerlink" title="CPU和GPU"></a>CPU和GPU</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><blockquote>
+<p>现代计算机整个系统的运算核心、控制核心</p>
+</blockquote>
+<img src="https://s1.ax1x.com/2020/07/09/UefeDP.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><blockquote>
+<p>可进行绘图运算工作的专用微处理器，是连接计算机和显示中断的纽带</p>
+</blockquote>
+<img src="https://s1.ax1x.com/2020/07/09/UefmHf.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>可以发现 <code>GPU</code> 内部包含众多的<code>ALU（算术逻辑单元）</code> ，它是计算机内部芯片处理算术运算和逻辑运算的核心，由上图可见<code>GPU</code> 的运算能力远超<code>CPU</code> ,因为GPU处理的是大批量的并发运算，而CPU则更多的是串行的逻辑运算。</p>
+<h2 id="计算机渲染原理"><a href="#计算机渲染原理" class="headerlink" title="计算机渲染原理"></a>计算机渲染原理</h2><p>首先我们得了解计算机是如何把图像渲染出来的：</p>
+<img src="https://s1.ax1x.com/2020/07/09/Ueh6zj.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>现代的屏幕都是通过上述类似逐行扫描而把图像显示到屏幕上，而在其底层则是通过一个 <code>帧缓冲区</code> 映射到 <code>屏幕显示器</code> 上：</p>
+<img src="https://s1.ax1x.com/2020/07/09/UehgQs.md.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>计算机系统内部结构：</p>
+<img src="https://s1.ax1x.com/2020/07/09/Ue5Ev9.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>也就是通过<code>CPU</code>对图像的数据进行处理，交给显示处理器，显示处理器再处理成图像数据存储到<code>帧缓冲区</code> 等待显示控制器的信号，将<code>帧缓冲区</code>的内容同步到显示器。</p>
+<h2 id="撕裂和掉帧"><a href="#撕裂和掉帧" class="headerlink" title="撕裂和掉帧"></a>撕裂和掉帧</h2><p>我们的屏幕是逐行扫描成像，当扫描到底部就会重新扫描下一帧的内容：</p>
+<img src="https://s1.ax1x.com/2020/07/09/Ue52V0.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>我们或许会看到过这样的情形：</p>
+<img src="https://s1.ax1x.com/2020/07/09/Ue5cbq.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>这就是通常所讲的<code>图像撕裂</code>问题，为什么会出现这种撕裂问题呢？</p>
+<p>图像显示其本质是拿到图像数据后，GPU进行渲染 -&gt; 存储到帧缓冲区 - &gt; 交给视频控制器 -&gt; 读取帧缓冲区的信息（位图）-&gt; 数模转换（数字信号转换为模拟信号） -&gt; 屏幕逐行扫描显示，当第一帧图像扫描到某个位置的时候，GPU已经拿到新的数据并存到帧缓冲区，这个时候视频控制器就从帧缓冲区扫描的是新拿到的一帧图像，但是屏幕是逐行扫描的，他不会打断仍旧是从中间的位置继续扫描，这样就可能出现断层的现象，导致我们所说的<code>撕裂</code>问题，究其原因就是视频控制器的显示速度超过的GPU处理图形的速度。</p>
+<p>为了解决撕裂问题，苹果引入了<code>双缓冲区</code>的概念，进而提出了 <code>Vsync垂直同步</code>技术：</p>
+<img src="https://s1.ax1x.com/2020/07/09/UebKUI.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
+
+<p>GPU 开辟AB两个缓冲区，并对缓冲区进行同步加锁处理，执行流程就是当A缓冲区拿到第一帧数据，就给A缓冲区加上一把锁，屏幕控制器从A拿到数据并逐行扫描完成，A帧缓冲区解锁，并把屏幕控制器指向B缓冲区，B缓冲区加锁并逐行扫描显示，在屏幕控制器扫描B缓冲区的时候，A缓冲区拿到GPU传过来的新数据，以此类推，解决撕裂问题。</p>
+<p>其实仔细观察上述图片我们会发现 <code>双缓冲区+垂直同步</code>会解决撕裂问题，但是A图像本来应该显示一帧，由于CPU和GPU的处理速度问题，导致了A的这一帧显示了两次，从而导致B晚一帧显示出来，这就导致了新的问题 <code>掉帧</code>，掉帧并不是丢失图片，而是屏幕 <code>重复渲染了同一帧的数据</code>。</p>
+<p>为了减少掉帧<code>我们并不能解决掉帧问题，只能尽量通过时间偏移来尽量的减少</code>，这个时候苹果提出了新的解决方案：<code>三缓冲区</code>，再开辟 </p>
+<h2 id="IOS下的渲染框架"><a href="#IOS下的渲染框架" class="headerlink" title="IOS下的渲染框架"></a>IOS下的渲染框架</h2>]]></content>
+      <tags>
+        <tag>OpenGL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenGL：你真的懂离屏渲染吗？</title>
     <url>/posts/93a4c1aa/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>作为一个IOS开发者，<code>离屏渲染</code> 这个名词或许你并不陌生，或多或少你都能说点什么，比如我们通常最简单的圆角方式 <code>cornerRadius</code> 和 <code>clipsToBounds</code> 会触发离屏渲染，会影响性能….<a id="more"></a></p>
@@ -36,6 +80,9 @@
 <p>那么离屏渲染的过程就是这样：</p>
 <img src="https://s1.ax1x.com/2020/07/07/UECOL8.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:50%;" />
 
+<blockquote>
+<p>如果出现离屏渲染，会经历两次上下文切换，第一次是开辟离屏缓冲区并进入离屏缓冲区，第二次是离开离屏缓冲区并将数据交换到帧缓冲区，等到显示处理器信号，显示到屏幕上，也就是说，不论怎么样，都会经过帧缓冲区，但是离屏缓冲区要多一步操作。</p>
+</blockquote>
 <h3 id="渲染过程对比"><a href="#渲染过程对比" class="headerlink" title="渲染过程对比"></a>渲染过程对比</h3><p>通常我们比如要在屏幕上显示3个图层的叠加，其过程是这样：</p>
 <img src="https://s1.ax1x.com/2020/07/08/UEUuh4.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
 

@@ -122,6 +122,9 @@
 <p>那么离屏渲染的过程就是这样：</p>
 <img src="https://s1.ax1x.com/2020/07/07/UECOL8.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:50%;" />
 
+<blockquote>
+<p>如果出现离屏渲染，会经历两次上下文切换，第一次是开辟离屏缓冲区并进入离屏缓冲区，第二次是离开离屏缓冲区并将数据交换到帧缓冲区，等到显示处理器信号，显示到屏幕上，也就是说，不论怎么样，都会经过帧缓冲区，但是离屏缓冲区要多一步操作。</p>
+</blockquote>
 <h3 id="渲染过程对比"><a href="#渲染过程对比" class="headerlink" title="渲染过程对比"></a>渲染过程对比</h3><p>通常我们比如要在屏幕上显示3个图层的叠加，其过程是这样：</p>
 <img src="https://s1.ax1x.com/2020/07/08/UEUuh4.jpg?w=255&amp;h=224&amp;f=jpeg&amp;s=7755" style="zoom:0%;" />
 
@@ -183,6 +186,15 @@
     
         
   <nav class="article-nav">
+    
+      <a href="/posts/86ed34e7/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            OpenGL：图像的渲染、撕裂、掉帧
+          
+        </div>
+      </a>
     
     
       <a href="/posts/7f4eafc3/" class="article-nav-link">
