@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OpenGL：渲染的基础</title>
+    <url>/posts/7f3a747e/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="OpenGL渲染流程解析"><a href="#OpenGL渲染流程解析" class="headerlink" title="OpenGL渲染流程解析"></a>OpenGL渲染流程解析</h2><h2 id="OpenGL固定着色器"><a href="#OpenGL固定着色器" class="headerlink" title="OpenGL固定着色器"></a>OpenGL固定着色器</h2><h2 id="OpenGL基本图元"><a href="#OpenGL基本图元" class="headerlink" title="OpenGL基本图元"></a>OpenGL基本图元</h2>]]></content>
+      <tags>
+        <tag>OpenGL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenGL：图像的渲染、撕裂、掉帧</title>
     <url>/posts/86ed34e7/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>作为一个IOS开发者，日常我们更多的是接触业务，我们做的最多的是<code>addSubView:</code> 等等，那么我们的视图就显示出来了。那么它们是如何显示出来的，计算机内部是如何工作的，其底层原理是什么，有时候会卡顿掉帧，这些又究竟是什么原因？这篇文章来大概讲述一下这些内容。<a id="more"></a></p>
