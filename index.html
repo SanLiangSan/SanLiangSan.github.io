@@ -141,6 +141,146 @@
 
 </article>
         
+          <article id="post-OpenGL：正背面剔除、深度测试" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/posts/4c2cf919/">OpenGL：正背面剔除、深度测试</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/posts/4c2cf919/" class="article-date">
+  <time datetime="2020-07-13T14:27:05.000Z" itemprop="datePublished">2020-07-13</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+  <div class="article-gallery">
+    <div class="article-gallery-photos">
+      
+        
+          <a class="article-gallery-img" href="/posts/4c2cf919/" rel="gallery_ckcklpcw70000po3f2nwd71sa">
+            <img src="https://s1.ax1x.com/2020/07/13/UtP8oT.jpg" itemprop="image">
+          </a>
+        
+      
+    </div>
+  </div>
+
+
+                                                
+                                                                    
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <!-- <a data-url="http://typeco.cn/posts/4c2cf919/" data-id="ckcklpcw70000po3f2nwd71sa" class="article-share-link">
+                                            分享
+                                        </a> -->
+                                        
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
+          <article id="post-OpenGL：渲染之固定着色器" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/posts/b5a93e1/">OpenGL：渲染之固定着色器</a>
+    </h2>
+  
+  
+
+
+
+
+            </header>
+            
+
+                
+                    <div class="article-meta">
+                        <a href="/posts/b5a93e1/" class="article-date">
+  <time datetime="2020-07-12T14:53:47.000Z" itemprop="datePublished">2020-07-12</time>
+</a>
+                            
+                    </div>
+                    
+
+                        
+
+                                    <div class="article-entry" itemprop="articleBody">
+                                        
+
+
+                                            
+  <div class="article-gallery">
+    <div class="article-gallery-photos">
+      
+        
+          <a class="article-gallery-img" href="/posts/b5a93e1/" rel="gallery_ckcklj5z10000ia3fh9ardijt">
+            <img src="https://s1.ax1x.com/2020/07/12/UGSNlV.jpg" itemprop="image">
+          </a>
+        
+      
+    </div>
+  </div>
+
+
+                                                
+                                                                    
+                                                                        
+                                    </div>
+                                    <footer class="article-footer">
+                                        <!-- <a data-url="http://typeco.cn/posts/b5a93e1/" data-id="ckcklj5z10000ia3fh9ardijt" class="article-share-link">
+                                            分享
+                                        </a> -->
+                                        
+                                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li></ul>
+
+                                    </footer>
+
+    </div>
+
+    
+
+                
+
+</article>
+        
           <article id="post-OpenGL：渲染的基础" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
     <div class="article-inner">
@@ -181,7 +321,7 @@
       
         
           <a class="article-gallery-img" href="/posts/7f3a747e/" rel="gallery_ckch35ekw00001w3f27m71ybj">
-            <img src="https://s1.ax1x.com/2020/07/10/UKadgK.jpg" itemprop="image">
+            <img src="https://s1.ax1x.com/2020/07/14/Ut1gVU.jpg" itemprop="image">
           </a>
         
       
@@ -190,8 +330,17 @@
 
 
                                                 
-                                                                    <h2 id="OpenGL渲染流程解析"><a href="#OpenGL渲染流程解析" class="headerlink" title="OpenGL渲染流程解析"></a>OpenGL渲染流程解析</h2><h2 id="OpenGL固定着色器"><a href="#OpenGL固定着色器" class="headerlink" title="OpenGL固定着色器"></a>OpenGL固定着色器</h2><h2 id="OpenGL基本图元"><a href="#OpenGL基本图元" class="headerlink" title="OpenGL基本图元"></a>OpenGL基本图元</h2>
-                                                                        
+                                                    <h2 id="OpenGL渲染流程解析"><a href="#OpenGL渲染流程解析" class="headerlink" title="OpenGL渲染流程解析"></a>OpenGL渲染流程解析</h2><ul>
+<li><code>attrubutes</code> 属性只可传给 <code>Vertex Shader(顶点着色器)</code></li>
+<li>通过<code>顶点着色器</code>向 <code>Primitive(几何图元)</code> 传递 <code>Position</code> 和 <code>Outs</code></li>
+<li>可以通过 <code>OpenGl API</code> 向顶点着色器或者片元着色器</li>
+<li><code>Texture Data(纹理数据)</code>也可以同时传递给顶点着色器和片元着色器，但是真正用它的是片元着色器。
+                                                        
+                                                            <a class="article-more-link" href="/posts/7f3a747e/">
+                                                                ...阅读全文
+                                                            </a>
+                                                            
+                                                                
                                     </div>
                                     <footer class="article-footer">
                                         <!-- <a data-url="http://typeco.cn/posts/7f3a747e/" data-id="ckch35ekw00001w3f27m71ybj" class="article-share-link">
@@ -647,157 +796,6 @@
                                     </div>
                                     <footer class="article-footer">
                                         <!-- <a data-url="http://typeco.cn/posts/fdf3e82a/" data-id="ck9zdifg20000c93fgqbffkvj" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-数据结构与算法-树" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/b0f8e6ff/">数据结构与算法 - 树</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/b0f8e6ff/" class="article-date">
-  <time datetime="2020-04-26T07:22:09.000Z" itemprop="datePublished">2020-04-26</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/b0f8e6ff/" rel="gallery_ck9gtbwgx0000ju3fbmbm34oo">
-            <img src="https://s1.ax1x.com/2020/04/26/JcfAfK.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <p><strong>树</strong> 的结构在日常生活中我们有涉及到：比如我们的 <strong>族谱</strong>、<strong>公司的架构图</strong>等等，今天我们就具体看看树到底是一个什么样的数据结构，它有哪些分类以及如何去实现树。
-                                                        
-                                                            <a class="article-more-link" href="/posts/b0f8e6ff/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/b0f8e6ff/" data-id="ck9gtbwgx0000ju3fbmbm34oo" class="article-share-link">
-                                            分享
-                                        </a> -->
-                                        
-                                        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-                                    </footer>
-
-    </div>
-
-    
-
-                
-
-</article>
-        
-          <article id="post-数据结构与算法-字符串匹配" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/posts/58f542ed/">数据结构与算法 - 字符串匹配</a>
-    </h2>
-  
-  
-
-
-
-
-            </header>
-            
-
-                
-                    <div class="article-meta">
-                        <a href="/posts/58f542ed/" class="article-date">
-  <time datetime="2020-04-21T13:24:30.000Z" itemprop="datePublished">2020-04-21</time>
-</a>
-                            
-                    </div>
-                    
-
-                        
-
-                                    <div class="article-entry" itemprop="articleBody">
-                                        
-
-
-                                            
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/posts/58f542ed/" rel="gallery_ck9a5s6ng0000au3f4ev8a2lk">
-            <img src="https://s1.ax1x.com/2020/04/21/JGLvGR.jpg" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-                                                
-                                                    <blockquote>
-<p>有主串 S = “abcacabdc”,模式串 T = “abd”,请查找出模式串在主串第一次出现的位置，注意：主串和模式串均为小写字母切都是合法输入。
-                                                        
-                                                            <a class="article-more-link" href="/posts/58f542ed/">
-                                                                ...阅读全文
-                                                            </a>
-                                                            
-                                                                
-                                    </div>
-                                    <footer class="article-footer">
-                                        <!-- <a data-url="http://typeco.cn/posts/58f542ed/" data-id="ck9a5s6ng0000au3f4ev8a2lk" class="article-share-link">
                                             分享
                                         </a> -->
                                         
