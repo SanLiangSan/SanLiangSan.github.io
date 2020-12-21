@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>设计模式之简单工厂模式</title>
+    <url>/posts/eeb5bd44/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OpenGL：正背面剔除、深度测试</title>
     <url>/posts/4c2cf919/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
@@ -1625,8 +1633,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>GCD</tag>
         <tag>objective-c</tag>
+        <tag>GCD</tag>
       </tags>
   </entry>
   <entry>
@@ -1674,8 +1682,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>GCD</tag>
         <tag>objective-c</tag>
+        <tag>GCD</tag>
         <tag>Timer</tag>
       </tags>
   </entry>
@@ -1723,8 +1731,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>objective-c</tag>
         <tag>KVO</tag>
+        <tag>objective-c</tag>
       </tags>
   </entry>
   <entry>
@@ -1810,8 +1818,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>objective-c</tag>
         <tag>KVO</tag>
+        <tag>objective-c</tag>
       </tags>
   </entry>
   <entry>
