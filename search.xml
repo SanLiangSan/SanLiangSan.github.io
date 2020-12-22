@@ -1384,8 +1384,8 @@
 <h2 id="Block定义与使用"><a href="#Block定义与使用" class="headerlink" title="Block定义与使用"></a>Block定义与使用</h2><h2 id="Block与外部变量"><a href="#Block与外部变量" class="headerlink" title="Block与外部变量"></a>Block与外部变量</h2><h2 id="Block与Copy"><a href="#Block与Copy" class="headerlink" title="Block与Copy"></a>Block与Copy</h2><h2 id="Block的循环引用"><a href="#Block的循环引用" class="headerlink" title="Block的循环引用"></a>Block的循环引用</h2><h2 id="值得注意的问题"><a href="#值得注意的问题" class="headerlink" title="值得注意的问题"></a>值得注意的问题</h2>]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>objective-c</tag>
         <tag>Block</tag>
+        <tag>objective-c</tag>
       </tags>
   </entry>
   <entry>
@@ -1769,8 +1769,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>KVO</tag>
         <tag>objective-c</tag>
+        <tag>KVO</tag>
       </tags>
   </entry>
   <entry>
@@ -1856,8 +1856,8 @@
 ]]></content>
       <tags>
         <tag>IOS</tag>
-        <tag>KVO</tag>
         <tag>objective-c</tag>
+        <tag>KVO</tag>
       </tags>
   </entry>
   <entry>

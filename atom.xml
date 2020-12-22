@@ -502,9 +502,9 @@
     
       <category term="IOS" scheme="http://typeco.cn/tags/IOS/"/>
     
-      <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
-    
       <category term="Block" scheme="http://typeco.cn/tags/Block/"/>
+    
+      <category term="objective-c" scheme="http://typeco.cn/tags/objective-c/"/>
     
   </entry>
   
